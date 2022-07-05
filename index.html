@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Vue</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <style>
+        .box {
+            width: 250px;
+            height: 160px;
+            background-color: rgb(210, 224, 177);
+            border-radius: 10px;
+            margin: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        li {
+            background-color: antiquewhite;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 10px;
+        }
+
+        li.fav {
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{ title }}</h1>
+
+        <div v-if="showAge">
+            <p>{{ age }}</p>
+        </div>
+
+        <button v-on:click="age++">Add age</button>
+        <div @click="changeTitle('my title')">Change Title!!!</div>
+
+        <button @click="toggleAge">
+            <span v-if="showAge">Hide Age</span>
+            <span v-else>Show Age</span>
+        </button>
+
+        <div class="box" @mouseover="handleEvent($event, 5)">Mouse Over</div>
+        <div class="box" @mouseleave="handleEvent">Mouse Leave</div>
+        <div class="box" @dblclick="handleEvent">Double Click</div>
+        <div class="box" @mousemove="handleMousemove">pos - {{ x }}, {{ y }}</div>
+
+        <ul>
+            <!-- <li v-for="item in books" :class="{fav: item.isFav}" @click="toggleFav(item)"> -->
+            <li v-for="item in filterBooks" :class="{fav: item.isFav}" @click="toggleFav(item)">
+                <img :src="item.img" :alt="item.title">
+                <h3>{{item.title}}</h3>
+                <p>{{item.author}}</p>
+            </li>
+        </ul>
+
+        <a v-bind:href="myurl">Google Home Page</a>
+
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
